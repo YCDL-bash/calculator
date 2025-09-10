@@ -15,11 +15,13 @@ class View(QWidget):
         self.te1 = QPlainTextEdit()
         self.te1.setReadOnly(True)
 
-        self.btn1 = QPushButton('Message', self)
+        self.btn1 = QPushButton('Calc', self) # 버튼 이름 변경
         self.btn2 = QPushButton('Clear', self)
 
         self.le1 = QLineEdit('0', self) # 라인 에디트 1 추가
         self.le1.setAlignment(QtCore.Qt.AlignRight) # 라인 에디트 1 문자열 배치
+        self.le1.setFocus(True) # 라인 에디트 1에 포커스 설정
+        self.le1.selectAll() # 라인 에디트 1의 문자열 전체 선택
 
         self.le2 = QLineEdit('0', self) # 라인 에디트 2 추가
         self.le2.setAlignment(QtCore.Qt.AlignRight) # 라인 에디트 1 문자열 배치
@@ -50,7 +52,7 @@ class View(QWidget):
         self.resize(256, 256)
         self.show()
 
-    def setDisplay(self, text): # 함수명 변경
+    def setDisplay(self, text):
         self.te1.appendPlainText(text)
 
     def clearMessage(self):
