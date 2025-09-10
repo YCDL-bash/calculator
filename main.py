@@ -1,40 +1,15 @@
 # ch 4.2.1 main.py
 import sys
-from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QVBoxLayout, 
-                             QMessageBox, QPlainTextEdit) # QPlainTextEdit 추가
-from PyQt5.QtGui import QIcon # icon을 추가하기 위한 라이브러리
+from ui import View # ui.py의 View 클래스 추가
+from ctrl import Control # ctrl.py의 Control 클래스 추가
+from PyQt5.QtWidgets import QApplication
 
-class Calculator(QWidget):
-
-    def __init__(self):
-        super().__init__()
-        self.initUI()
-
-    def initUI(self):
-        self.te1 = QPlainTextEdit() # 텍스트 에디트 위젯 생성
-        self.te1.setReadOnly(True) # 텍스트 에디트 위젯을 읽기만 가능하도록 수정
-        
-        self.btn1 = QPushButton('Message', self) #버튼추가
-        self.btn1.clicked.connect(self.activateMessage) #버튼 클릭 시 핸들러 함수 연결
-        
-        vbox = QVBoxLayout()
-        vbox.addWidget(self.te1) # 수직 레이아웃에 텍스트 에디트 위젯 추가
-        vbox.addStretch(1)
-        vbox.addWidget(self.btn1)
-        vbox.addStretch(1)
-
-        self.setLayout(vbox)
-
-        self.setWindowTitle('Calculator')
-        self.setWindowIcon(QIcon('icon.png'))
-        self.resize(256, 256)
-        self.show()
-
-    def activateMessage(self): # 버튼을 클릭 시 동작하는 함수:메시지박스 출력
-        # QMessageBox.information(self, "information", "Button Clicked!")
-        self.te1.appendPlainText("Button Clicked!")
+def main(): # 프로그램 실행(Application) 관련 내용 함수화
+    calc = QApplication(sys.argv)
+    app = QApplication(sys.argv)
+    view = View() # view 인스턴스 선언
+    Control(view=view) # Control 인스턴스 선언
+    sys.exit(app.exec_())
 
 if __name__=='__main__':
-    app = QApplication(sys.argv)
-    view = Calculator()
-    sys.exit(app.exec_())
+    main()
